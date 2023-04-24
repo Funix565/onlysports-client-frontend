@@ -1,9 +1,9 @@
-import { Typography, useTheme } from "@mui/material";
+import {Typography, Link, useTheme, CardActionArea, CardMedia, Card, CardContent} from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
 
 const AdvertWidget = () => {
-    const { palette } = useTheme();
+    const {palette} = useTheme();
     const dark = palette.neutral.dark;
     const main = palette.neutral.main;
     const medium = palette.neutral.medium;
@@ -18,25 +18,32 @@ const AdvertWidget = () => {
                     Dmytro Denkin, Serhii Sezonchyk
                 </Typography>
             </FlexBetween>
-            <img
-                width="100%"
-                height="auto"
-                alt="advert"
-                src={`${process.env.REACT_APP_API_URL}/assets/info4.jpg`}
-                style={{ borderRadius: "0.75rem", margin: "0.75rem 0" }}
-            />
-            <FlexBetween>
-                <Typography color={main}>
-                    MassageGurus
-                </Typography>
-                <Typography color={medium}>
-                    massage.com
-                </Typography>
-            </FlexBetween>
-            <Typography color={medium} m="0.5rem 0">
-                Massage day is the best day of the week.
-                Putting the balance back into your life. Licensed and Certified Therapists
-            </Typography>
+            <Card
+                style={{borderRadius: "0.75rem", margin: "0.75rem 0"}}>
+                <CardActionArea
+                    href="https://youtu.be/K8YELRmUb5o"
+                    target="_blank" rel="noopener">
+                    <CardMedia
+                        component="img"
+                        height="auto"
+                        image={`${process.env.REACT_APP_API_URL}/assets/credit.jpg`}
+                        alt="video thumbnail"
+                    />
+                    <CardContent>
+                        <FlexBetween>
+                            <Typography color={main}>
+                                Tutorial
+                            </Typography>
+                            <Link href="https://youtu.be/K8YELRmUb5o" target="_blank" rel="noopener">
+                                https://youtu.be/K8YELRmUb5o
+                            </Link>
+                        </FlexBetween>
+                        <Typography color={medium} m="0.5rem 0">
+                            Build a COMPLETE Fullstack Responsive MERN App with Auth, Likes, Dark Mode
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+            </Card>
         </WidgetWrapper>
     );
 };
