@@ -26,7 +26,7 @@ const AdvertWidget = () => {
                     <CardMedia
                         component="img"
                         height="auto"
-                        image={`${process.env.REACT_APP_API_URL}/assets/credit.jpg`}
+                        image="../assets/credit.jpg"
                         alt="video thumbnail"
                     />
                     <CardContent>
