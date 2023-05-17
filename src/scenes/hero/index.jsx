@@ -10,7 +10,6 @@ const HeroInfo = ({setSelectedPage}) => {
 
     // TODO: Use ternary operator, check isAboveMediumScreens -- instead of @media
 
-    // TODO: Check layout. It doesn't look good. Image is too big. Text goes beyond edges
     return (
         <Box
             component="section"
@@ -26,7 +25,6 @@ const HeroInfo = ({setSelectedPage}) => {
                 }
             }}>
             {/*Image and main header*/}
-            {/*TODO: Tidy up styles and layout 1:59:00*/}
             <Box
                 component={motion.div}
                 onViewportEnter={() => setSelectedPage(SelectedPage.Home)}
@@ -47,7 +45,8 @@ const HeroInfo = ({setSelectedPage}) => {
                         zIndex: '10',
                         mt: '8rem',
                         '@media (min-width: 1060px)': {
-                            flexBasis: 3/5
+                            // Fraction doesn't work
+                            flexBasis: '60%'
                         }
                     }}
                 >
@@ -63,7 +62,6 @@ const HeroInfo = ({setSelectedPage}) => {
                             visible: { opacity: 1, x: 0}
                         }}
                         sx={{
-                            // TODO: Perhaps his md: was redefined to 1060px
                             '@media (min-width: 1060px)': {
                                 mt: '-5rem'
                             }
@@ -149,13 +147,12 @@ const HeroInfo = ({setSelectedPage}) => {
                         </Link>
                     </Box>
                 </Box>
-
                 {/*image*/}
                 <Box
                     sx={{
                         // TODO: Perhaps all this flex stuff could be wrapped in our FlexBetween, override properties if specified
                         display: 'flex',
-                        flexBasis: 3/5,
+                        flexBasis: '60%',
                         justifyContent: 'center',
                         '@media (min-width: 1060px)': {
                             zIndex: '10',
