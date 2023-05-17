@@ -3,6 +3,7 @@ import {Box, Link, Typography, useMediaQuery} from "@mui/material";
 //import StyledAnchorLink from "navbar/StyledAnchorLink";
 import {SelectedPage} from "../../state/enums";
 import AnchorLink from "react-anchor-link-smooth-scroll";
+import {motion} from "framer-motion";
 
 const HeroInfo = ({setSelectedPage}) => {
     const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
@@ -27,6 +28,8 @@ const HeroInfo = ({setSelectedPage}) => {
             {/*Image and main header*/}
             {/*TODO: Tidy up styles and layout 1:59:00*/}
             <Box
+                component={motion.div}
+                onViewportEnter={() => setSelectedPage(SelectedPage.Home)}
                 sx={{
                     mx: 'auto',
                     width: 5/6,
@@ -50,6 +53,15 @@ const HeroInfo = ({setSelectedPage}) => {
                 >
                     {/*headings*/}
                     <Box
+                        component={motion.div}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{once: true, amount:0.5}}
+                        transition={{duration: 0.5}}
+                        variants={{
+                            hidden: { opacity: 0, x:-50},
+                            visible: { opacity: 1, x: 0}
+                        }}
                         sx={{
                             // TODO: Perhaps his md: was redefined to 1060px
                             '@media (min-width: 1060px)': {
@@ -97,6 +109,15 @@ const HeroInfo = ({setSelectedPage}) => {
 
                     {/*ACTIONS*/}
                     <Box
+                        component={motion.div}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{once: true, amount:0.5}}
+                        transition={{delay : 0.2, duration: 0.5}}
+                        variants={{
+                            hidden: { opacity: 0, x:-50},
+                            visible: { opacity: 1, x: 0}
+                        }}
                         sx={{
                             mt: '2rem',
                             display: 'flex',
