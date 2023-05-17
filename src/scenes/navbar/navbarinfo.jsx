@@ -1,13 +1,21 @@
 import {useState} from "react";
-import {MenuIcon, CloseIcon} from '@mui/icons-material';
 import FlexBetween from "components/FlexBetween";
-import {Typography} from "@mui/material";
+import {Typography, useMediaQuery} from "@mui/material";
+import StyledAnchorLink from "./StyledAnchorLink";
+import ActionButton from "components/ActionButton";
 
-const NavbarInfo = () => {
+const NavbarInfo = ({isTopOfPage, selectedPage, setSelectedPage}) => {
+    const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
+
     return (
         <nav>
             <FlexBetween
-                sx={{position: 'fixed', top: '0px', zIndex: '30', width: '100%', py: '1rem', px: '6%'}}>
+                sx={{
+                    // TODO: Colors from palette. Check behaviour on scroll
+                    position: 'fixed', top: '0px', zIndex: '30', width: '100%', py: '1rem', px: '6%',
+                    backgroundColor: isTopOfPage ? '' : '#FFE1E0',
+                    filter: isTopOfPage ? '' : 'drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06))'
+                }}>
                 <FlexBetween
                     sx={{width: '100%'}}>
                     <FlexBetween
@@ -22,20 +30,35 @@ const NavbarInfo = () => {
                         </Typography>
 
                         {/*RIGHT SIDE*/}
-                        <FlexBetween
-                            sx={{width: '100%'}}>
+                        {isAboveMediumScreens && (
                             <FlexBetween
-                                sx={{gap: '2rem', fontSize: 'small'}}>
-                                <p>Home</p>
-                                <p>Benefits</p>
-                                <p>Contact Us</p>
+                                sx={{width: '100%'}}>
+                                <FlexBetween
+                                    sx={{gap: '2rem', fontSize: 'small'}}>
+                                    <StyledAnchorLink
+                                        page="Home"
+                                        selectedPage={selectedPage}
+                                        setSelectedPage={setSelectedPage}
+                                    />
+                                    <StyledAnchorLink
+                                        page="Benefits"
+                                        selectedPage={selectedPage}
+                                        setSelectedPage={setSelectedPage}
+                                    />
+                                    <StyledAnchorLink
+                                        page="Contact Us"
+                                        selectedPage={selectedPage}
+                                        setSelectedPage={setSelectedPage}
+                                    />
+                                </FlexBetween>
+                                <FlexBetween
+                                    sx={{gap: '2rem'}}>
+                                    <p>Sign In</p>
+                                    <ActionButton>Become a Member</ActionButton>
+                                </FlexBetween>
                             </FlexBetween>
-                            <FlexBetween
-                                sx={{gap: '2rem'}}>
-                                <p>Sign In</p>
-                                <button>Become a Member</button>
-                            </FlexBetween>
-                        </FlexBetween>
+                        )}
+                        {/*No need to hide navbar in hamburger MenuIcon based on mediaQuery. Just hide it and scroll a little bit for every section*/}
                     </FlexBetween>
                 </FlexBetween>
             </FlexBetween>
