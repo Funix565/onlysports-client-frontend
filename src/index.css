@@ -9,20 +9,11 @@ body,
     font-family: "Rubik", sans-serif;
 }
 
-/*TODO: Probably remove and use MUI wrap with `sx` prop*/
-.text-primary-500 {
-    color: #FF6B66
-}
-.text-primary-500:hover {
-    color: #FFA6A3
-}
-/*From Tailwind docs https://tailwindcss.com/docs/transition-property*/
-.transition {
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-}
-
-.duration-500 {
-    transition-duration: 500ms;
+/*From https://tailwindcss.com/docs/preflight#images-are-block-level*/
+/*From https://tailwindcss.com/docs/preflight#images-are-constrained-to-the-parent-width*/
+img {
+    display: block;
+    vertical-align: middle;
+    max-width: 100%;
+    height: auto;
 }
