@@ -3,6 +3,7 @@ import NavbarInfo from "scenes/navbar/navbarinfo";
 import {useEffect, useState} from "react";
 import {SelectedPage} from "state/enums";
 import HeroInfo from "scenes/hero";
+import BenefitsInfo from "scenes/benefits";
 
 const InfoPage = () => {
     const [selectedPage, setSelectedPage] = useState(SelectedPage.Home);
@@ -33,7 +34,7 @@ const InfoPage = () => {
                 setSelectedPage={setSelectedPage}
             />
                 <HeroInfo setSelectedPage={setSelectedPage}/>
-                {/*<BenefitsInfo />*/}
+                <BenefitsInfo setSelectedPage={setSelectedPage} />
                 {/*<ContactInfo />*/}
                 {/*<Footer />*/}
         </div>
