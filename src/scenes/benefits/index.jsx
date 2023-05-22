@@ -122,6 +122,7 @@ const BenefitsInfo = ({setSelectedPage}) => {
                 </Box>
 
                 {/*DESCRIPTION AND IMAGE*/}
+                {/*TODO: Change area color after benefits cards*/}
                 <Box
                     sx={{
                         mt: '4rem',
