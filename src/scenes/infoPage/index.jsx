@@ -4,7 +4,8 @@ import {useEffect, useState} from "react";
 import {SelectedPage} from "state/enums";
 import HeroInfo from "scenes/hero";
 import BenefitsInfo from "scenes/benefits";
-import ContactInfo from "../contact";
+import ContactInfo from "scenes/contact";
+import Footer from "scenes/footer";
 
 const InfoPage = () => {
     const [selectedPage, setSelectedPage] = useState(SelectedPage.Home);
@@ -37,7 +38,7 @@ const InfoPage = () => {
                 <HeroInfo setSelectedPage={setSelectedPage}/>
                 <BenefitsInfo setSelectedPage={setSelectedPage} />
                 <ContactInfo setSelectedPage={setSelectedPage} />
-                {/*<Footer />*/}
+                <Footer />
         </div>
     );
 };
