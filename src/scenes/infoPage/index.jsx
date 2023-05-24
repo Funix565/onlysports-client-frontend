@@ -29,7 +29,7 @@ const InfoPage = () => {
         // TODO: replace div with Box and set theme color
         // IDK but color doesn't work globally for the whole page.
         // If it works, then it can't be changed in nested components for section only
-        <div>
+        <Box>
             <NavbarInfo
                 isTopOfPage={isTopOfPage}
                 selectedPage={selectedPage}
@@ -39,7 +39,7 @@ const InfoPage = () => {
                 <BenefitsInfo setSelectedPage={setSelectedPage} />
                 <ContactInfo setSelectedPage={setSelectedPage} />
                 <Footer />
-        </div>
+        </Box>
     );
 };
 

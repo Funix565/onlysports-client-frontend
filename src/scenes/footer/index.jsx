@@ -1,6 +1,8 @@
-import {Box, Typography} from "@mui/material";
+import {Box, Typography, useMediaQuery} from "@mui/material";
 
 const Footer = () => {
+    const isAboveMediumScreens = useMediaQuery("(min-width:1000px)");
+
     return (
         <Box
             component="footer"
@@ -14,18 +16,13 @@ const Footer = () => {
                     mx: 'auto',
                     width: 5/6,
                     gap: '4rem',
-                    '@media (min-width: 1060px)': {
-                        display: 'flex'
-                    }
+                    display: isAboveMediumScreens ? 'flex' : undefined
                 }}
             >
                 <Box
                     sx={{
-                        mt: '4rem',
                         flexBasis: '50%',
-                        '@media (min-width: 1060px)': {
-                            mt: '0px'
-                        }
+                        mt: isAboveMediumScreens ? '0px' : '4rem'
                     }}
                 >
                     {/*TODO: Extract logo into a separate component with hover and navigate*/}
@@ -50,11 +47,8 @@ const Footer = () => {
 
                 <Box
                     sx={{
-                        mt: '4rem',
                         flexBasis: '25%',
-                        '@media (min-width: 1060px)': {
-                            mt: '0px'
-                        }
+                        mt: isAboveMediumScreens ? '0px' : '4rem'
                     }}
                 >
                     <Typography variant="h4" fontWeight="700">
@@ -73,11 +67,8 @@ const Footer = () => {
 
                 <Box
                     sx={{
-                        mt: '4rem',
                         flexBasis: '25%',
-                        '@media (min-width: 1060px)': {
-                            mt: '0px'
-                        }
+                        mt: isAboveMediumScreens ? '0px' : '4rem'
                     }}
                 >
                     <Typography variant="h4" fontWeight="700">

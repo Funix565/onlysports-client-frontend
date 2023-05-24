@@ -1,11 +1,10 @@
-import {useState} from "react";
 import FlexBetween from "components/FlexBetween";
 import {Typography, useMediaQuery} from "@mui/material";
 import StyledAnchorLink from "./StyledAnchorLink";
 import ActionButton from "components/ActionButton";
 
 const NavbarInfo = ({isTopOfPage, selectedPage, setSelectedPage}) => {
-    const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
+    const isAboveMediumScreens = useMediaQuery("(min-width: 1000px)");
 
     return (
         <nav>

@@ -3,7 +3,7 @@ import {
     Diversity1,
     School
 } from '@mui/icons-material'
-import {Box, Typography} from "@mui/material";
+import {Box, Typography, useMediaQuery} from "@mui/material";
 import {motion} from "framer-motion";
 import {SelectedPage} from "../../state/enums";
 import HText from "components/HText";
@@ -45,6 +45,8 @@ const container ={
 };
 
 const BenefitsInfo = ({setSelectedPage}) => {
+    const isAboveMediumScreens = useMediaQuery("(min-width:1000px)");
+
     return (
         <Box
             component="section"
@@ -72,10 +74,8 @@ const BenefitsInfo = ({setSelectedPage}) => {
                         visible: { opacity: 1, x: 0}
                     }}
                     sx={{
-                        '@media (min-width: 1060px)': {
-                            my: '1.25rem',
-                            width: 3/5
-                        }
+                        my: isAboveMediumScreens ? '1.25rem' : undefined,
+                        width: isAboveMediumScreens ? 3/5 : undefined
                     }}
                 >
                     <HText>More than just a social network</HText>
@@ -104,9 +104,7 @@ const BenefitsInfo = ({setSelectedPage}) => {
                         justifyContent: 'space-between',
                         gap: '2rem',
                         mt: '1.25rem',
-                        '@media (min-width: 1060px)': {
-                            display: 'flex'
-                        }
+                        display: isAboveMediumScreens ? 'flex' : undefined
                     }}
                 >
                     {/*TODO: Fix Text color, links*/}
@@ -122,28 +120,34 @@ const BenefitsInfo = ({setSelectedPage}) => {
                 </Box>
 
                 {/*DESCRIPTION AND IMAGE*/}
-                {/*TODO: Change area color after benefits cards*/}
                 <Box
                     sx={{
-                        mt: '4rem',
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         gap: '5rem',
-                        '@media (min-width: 1060px)': {
-                            mt: '7rem',
-                            display: 'flex'
-                        }
+                        mt: isAboveMediumScreens ? '7rem' : '4rem',
+                        display: isAboveMediumScreens ? 'flex' : undefined
                     }}
                 >
                     {/*GRAPHIC*/}
-                    <img
-                        style={{marginLeft: 'auto', marginRight: 'auto'}}
-                        alt="benefits-page-graphic"
-                        src="../assets/BenefitsPageGraphic.png"
-                    />
+                    <Box
+                        sx={{
+                            flex: '1'
+                        }}
+                    >
+                        <img
+                            style={{marginLeft: 'auto', marginRight: 'auto'}}
+                            alt="benefits-page-graphic"
+                            src="../assets/BenefitsPageGraphic.png"
+                        />
+                    </Box>
 
                     {/*DESCRIPTION*/}
-                    <Box>
+                    <Box
+                        sx={{
+                            flex: '2'
+                        }}
+                    >
                         {/*TITLE*/}
                         <Box
                             sx={{

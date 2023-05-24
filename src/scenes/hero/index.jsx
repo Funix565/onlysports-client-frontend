@@ -6,9 +6,7 @@ import AnchorLink from "react-anchor-link-smooth-scroll";
 import {motion} from "framer-motion";
 
 const HeroInfo = ({setSelectedPage}) => {
-    const isAboveMediumScreens = useMediaQuery("(min-width:1060px)");
-
-    // TODO: Use ternary operator, check isAboveMediumScreens -- instead of @media
+    const isAboveMediumScreens = useMediaQuery("(min-width:1000px)");
 
     return (
         <Box
@@ -19,10 +17,8 @@ const HeroInfo = ({setSelectedPage}) => {
                 // TODO: confusions with colors
                 backgroundColor: '#F8F4EB',
                 py: '2.5rem',
-                '@media (min-width: 1060px)': {
-                    height: '100%',
-                    pb: '0'
-                }
+                height: isAboveMediumScreens ? '100%' : undefined,
+                pb: isAboveMediumScreens ? '0' : undefined
             }}>
             {/*Image and main header*/}
             <Box
@@ -33,21 +29,16 @@ const HeroInfo = ({setSelectedPage}) => {
                     width: 5/6,
                     alignItems: 'center',
                     justifyContent: 'center',
-                    '@media (min-width: 1060px)': {
-                        display: 'flex',
-                        height: 5/6
-                    }
+                    display: isAboveMediumScreens ? 'flex' : undefined,
+                    height: isAboveMediumScreens ? 5/6 : undefined
                 }}
             >
                 {/*main header*/}
                 <Box
                     sx={{
                         zIndex: '10',
-                        mt: '8rem',
-                        '@media (min-width: 1060px)': {
-                            // Fraction doesn't work
-                            flexBasis: '60%'
-                        }
+                        mt: isAboveMediumScreens ? '15rem' : '8rem',
+                        flexBasis: isAboveMediumScreens ? '60%' : undefined
                     }}
                 >
                     {/*headings*/}
@@ -62,9 +53,7 @@ const HeroInfo = ({setSelectedPage}) => {
                             visible: { opacity: 1, x: 0}
                         }}
                         sx={{
-                            '@media (min-width: 1060px)': {
-                                mt: '-5rem'
-                            }
+                            mt: isAboveMediumScreens ? '-5rem' : undefined
                         }}
                     >
                         <Box
@@ -79,11 +68,7 @@ const HeroInfo = ({setSelectedPage}) => {
                                         top: '-5rem',
                                         left: '-5rem',
                                         zIndex: '-1',
-                                    },
-                                    '@media (min-width: 1060px)': {
-                                        '&::before': {
-                                            content: 'url(../assets/DevelopText.png)'
-                                        }
+                                        content: isAboveMediumScreens ? 'url(../assets/DevelopText.png)' : undefined
                                     }
                                 }}
                             >
@@ -154,12 +139,12 @@ const HeroInfo = ({setSelectedPage}) => {
                         display: 'flex',
                         flexBasis: '60%',
                         justifyContent: 'center',
-                        '@media (min-width: 1060px)': {
+                        ...(isAboveMediumScreens && {
                             zIndex: '10',
                             ml: '10rem',
                             mt: '4rem',
                             justifyItems: 'end'
-                    }
+                        })
                 }}>
                     <img alt="home-pageGraphic" src="../assets/HomePageGraphic.png" />
                 </Box>

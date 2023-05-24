@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import {motion} from "framer-motion";
-import {Box, Button, TextField, Typography} from "@mui/material";
+import {Box, Button, TextField, Typography, useMediaQuery} from "@mui/material";
 import {SelectedPage} from "../../state/enums";
 import HText from "../../components/HText";
 
 const ContactInfo = ({ setSelectedPage }) => {
+
+    const isAboveMediumScreens = useMediaQuery("(min-width:1000px)");
 
     const {
         register,
@@ -46,9 +48,7 @@ const ContactInfo = ({ setSelectedPage }) => {
                         visible: { opacity: 1, x: 0}
                     }}
                     sx={{
-                        '@media (min-width: 1060px)': {
-                            width: 3 / 5
-                        }
+                        width: isAboveMediumScreens ? 3/5 : undefined
                     }}
                 >
                     <HText>
@@ -70,9 +70,7 @@ const ContactInfo = ({ setSelectedPage }) => {
                         mt: '2.5rem',
                         justifyContent: 'space-between',
                         gap: '2rem',
-                        '@media (min-width: 1060px)': {
-                            display: 'flex'
-                        }
+                        display: isAboveMediumScreens ? 'flex' : undefined
                     }}
                 >
                     <Box
@@ -86,11 +84,8 @@ const ContactInfo = ({ setSelectedPage }) => {
                             visible: { opacity: 1, y: 0}
                         }}
                         sx={{
-                            mt: '2.5rem',
                             flexBasis: '60%',
-                            '@media (min-width: 1060px)': {
-                                mt: '0px'
-                            }
+                            mt: isAboveMediumScreens ? '0px' : '2.5rem'
                         }}
                     >
                         <form
@@ -201,7 +196,7 @@ const ContactInfo = ({ setSelectedPage }) => {
                     </Box>
 
                     <Box
-                        component="section"
+                        component={motion.div}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{once: true, amount:0.5}}
@@ -212,17 +207,14 @@ const ContactInfo = ({ setSelectedPage }) => {
                         }}
                         sx={{
                             position: 'relative',
-                            mt: '4rem',
                             flexBasis: '40%',
-                            '@media (min-width: 1060px)': {
-                                mt: '0px'
-                            }
+                            mt: isAboveMediumScreens ? '0px' : '4rem'
                         }}
                     >
                         <Box
                             sx={{
                                 width: '100%',
-                                '@media (min-width: 1060px)': {
+                                ...(isAboveMediumScreens && {
                                     "&::before": {
                                         content: 'url(../assets/DevelopText.png)',
                                         position: 'absolute',
@@ -230,7 +222,7 @@ const ContactInfo = ({ setSelectedPage }) => {
                                         right: '-2.5rem',
                                         zIndex: '-1'
                                     }
-                                }
+                                })
                             }}
                         >
                             <img
