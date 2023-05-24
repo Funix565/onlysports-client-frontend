@@ -2,8 +2,11 @@ import FlexBetween from "components/FlexBetween";
 import {Typography, useMediaQuery} from "@mui/material";
 import StyledAnchorLink from "./StyledAnchorLink";
 import ActionButton from "components/ActionButton";
+import OnlyLogo from "components/OnlyLogo";
+import {useNavigate} from "react-router-dom";
 
 const NavbarInfo = ({isTopOfPage, selectedPage, setSelectedPage}) => {
+    const navigate = useNavigate();
     const isAboveMediumScreens = useMediaQuery("(min-width: 1000px)");
 
     return (
@@ -19,14 +22,11 @@ const NavbarInfo = ({isTopOfPage, selectedPage, setSelectedPage}) => {
                     sx={{width: '100%'}}>
                     <FlexBetween
                         sx={{width: '100%', gap: '4rem'}}>
+
                         {/*LEFT SIDE*/}
-                        <Typography
-                            fontWeight="bold"
-                            fontSize="clamp(1rem, 2rem, 2.25rem)"
-                            color="primary"
-                        >
-                            OnlySports
-                        </Typography>
+                        <OnlyLogo
+                            onClick={() => navigate("/")}
+                        />
 
                         {/*RIGHT SIDE*/}
                         {isAboveMediumScreens && (
