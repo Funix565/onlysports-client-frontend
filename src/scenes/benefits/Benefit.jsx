@@ -1,4 +1,4 @@
-import {Box, Link, Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import {SelectedPage} from "../../state/enums";
 import {motion} from "framer-motion";
@@ -55,24 +55,19 @@ const Benefit = ({icon, title, description, setSelectedPage}) => {
             >
                 {description}
             </Typography>
-            <Link
-                underline="always"
-                sx={{
+
+            {/*Ok, no cool hover effects and link styling. Leave it plain, apply styles via `style` prop*/}
+            <AnchorLink
+                style={{
                     fontSize: 'small',
                     fontWeight: '700',
-                    color: '#FF6B66',
-                    "&:hover": {
-                        color: '#FFC132'
-                    }
+                    color: '#FF6B66'
                 }}
+                onClick={() => setSelectedPage(SelectedPage.ContactUs)}
+                href={`#${SelectedPage.ContactUs}`}
             >
-                <AnchorLink
-                    onClick={() => setSelectedPage(SelectedPage.ContactUs)}
-                    href={`#${SelectedPage.ContactUs}`}
-                >
-                    <p>Learn More</p>
-                </AnchorLink>
-            </Link>
+                <p>Learn More</p>
+            </AnchorLink>
         </Box>
     );
 };

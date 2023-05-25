@@ -26,9 +26,6 @@ const InfoPage = () => {
     }, []);
 
     return (
-        // TODO: replace div with Box and set theme color
-        // IDK but color doesn't work globally for the whole page.
-        // If it works, then it can't be changed in nested components for section only
         <Box>
             <NavbarInfo
                 isTopOfPage={isTopOfPage}

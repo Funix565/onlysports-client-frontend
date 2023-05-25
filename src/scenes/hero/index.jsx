@@ -1,6 +1,5 @@
 import ActionButton from "components/ActionButton";
-import {Box, Link, Typography, useMediaQuery} from "@mui/material";
-//import StyledAnchorLink from "navbar/StyledAnchorLink";
+import {Box, Typography, useMediaQuery} from "@mui/material";
 import {SelectedPage} from "../../state/enums";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import {motion} from "framer-motion";
@@ -111,25 +110,20 @@ const HeroInfo = ({setSelectedPage}) => {
                         <ActionButton>
                             Join Now
                         </ActionButton>
-                        <Link
-                            underline="always"
-                            sx={{
+                        {/*    // TODO: Two buttons for Athlete and Trainer*/}
+
+                        {/*Ok, no cool hover effects and link styling. Leave it plain, apply styles via `style` prop*/}
+                        <AnchorLink
+                            style={{
                                 fontSize: 'small',
                                 fontWeight: '700',
-                                color: '#FF6B66',
-                                "&:hover": {
-                                    color: '#FFC132'
-                                }
+                                color: '#FF6B66'
                             }}
-                            // TODO: Two buttons for Athlete and Trainer
+                            onClick={() => setSelectedPage(SelectedPage.ContactUs)}
+                            href={`#${SelectedPage.ContactUs}`}
                         >
-                            <AnchorLink
-                                onClick={() => setSelectedPage(SelectedPage.ContactUs)}
-                                href={`#${SelectedPage.ContactUs}`}
-                            >
-                                <p>Learn More</p>
-                            </AnchorLink>
-                        </Link>
+                            <p>Learn More</p>
+                        </AnchorLink>
                     </Box>
                 </Box>
                 {/*image*/}
@@ -170,7 +164,7 @@ const HeroInfo = ({setSelectedPage}) => {
                         <Box
                             sx={{
                                 display: 'flex',
-                                width: 3/5,
+                                width: '100%',
                                 alignItems: 'center',
                                 // TODO: Use our FlexBetween
                                 justifyContent: 'space-between',

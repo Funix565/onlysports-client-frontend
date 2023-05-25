@@ -1,9 +1,10 @@
-import AnchorLink from "react-anchor-link-smooth-scroll";
 import {Link} from "@mui/material";
 
 const ActionButton = ({children}) => {
     return (
         // TODO: Replace hardcoded colors with useTheme -> palette
+        // TODO: onClick -- navigate to Creat Account: Coach or Athlete
+        // TODO: onClick different login for roles
         <Link
             underline="hover"
             sx={{
@@ -17,11 +18,7 @@ const ActionButton = ({children}) => {
                 }
             }}
         >
-            {/*// TODO: onClick -- navigate to Creat Account: Coach or Athlete*/}
-            {/*Maybe don't use AnchorLink. No scroll to section*/}
-            <AnchorLink>
-                {children}
-            </AnchorLink>
+            {children}
         </Link>
     );
 };
