@@ -1,6 +1,7 @@
-import {Box, Typography, useMediaQuery} from "@mui/material";
+import {Box, Typography, useMediaQuery, useTheme} from "@mui/material";
 
 const Footer = () => {
+    const { palette } = useTheme();
     const isAboveMediumScreens = useMediaQuery("(min-width:1000px)");
 
     return (
@@ -31,7 +32,8 @@ const Footer = () => {
 
                     <Typography
                         sx={{
-                            my: '1.25rem'
+                            my: '1.25rem',
+                            color: palette.neutral.main
                         }}
                     >
                         Step into the world of OnlySports, a vibrant community of young athletes, trainers, and sports enthusiasts.
@@ -39,7 +41,7 @@ const Footer = () => {
                         and a deep sense of unity. Here, passion meets purpose, and the love for sports knows no boundaries.
                     </Typography>
 
-                    <Typography>
+                    <Typography color={palette.neutral.main}>
                         &#169; OnlySports All Rights Reserved.
                     </Typography>
                 </Box>
@@ -53,13 +55,13 @@ const Footer = () => {
                     <Typography variant="h4" fontWeight="700">
                         Links
                     </Typography>
-                    <Typography sx={{ my: '1.25rem' }}>
+                    <Typography sx={{ my: '1.25rem', color: '#FF6B66' }}>
                         GitHub
                     </Typography>
-                    <Typography sx={{ my: '1.25rem' }}>
+                    <Typography sx={{ my: '1.25rem', color: '#FF6B66' }}>
                         GitHub
                     </Typography>
-                    <Typography sx={{ my: '1.25rem' }}>
+                    <Typography sx={{ my: '1.25rem', color: '#FF6B66' }}>
                         GitHub
                     </Typography>
                 </Box>
@@ -73,10 +75,10 @@ const Footer = () => {
                     <Typography variant="h4" fontWeight="700">
                         Contact Us
                     </Typography>
-                    <Typography sx={{ my: '1.25rem' }}>
+                    <Typography sx={{ my: '1.25rem', color: '#FF6B66' }}>
                         Visit us at 456 Active Street, Sportstown, Fitlandia
                     </Typography>
-                    <Typography>
+                    <Typography color='#FF6B66'>
                         Give us a ring at <a href="tel:+1234567890">+1234567890</a>
                     </Typography>
                 </Box>

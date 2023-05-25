@@ -1,4 +1,4 @@
-import {Box, Typography} from "@mui/material";
+import {Box, Typography, useTheme} from "@mui/material";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import {SelectedPage} from "../../state/enums";
 import {motion} from "framer-motion";
@@ -9,6 +9,8 @@ const childVariant = {
 };
 
 const Benefit = ({icon, title, description, setSelectedPage}) => {
+    const { palette } = useTheme();
+
     return (
         <Box
             component={motion.div}
@@ -50,7 +52,8 @@ const Benefit = ({icon, title, description, setSelectedPage}) => {
             </Typography>
             <Typography
                 sx={{
-                    my: '0.75rem'
+                    my: '0.75rem',
+                    color: palette.neutral.main
                 }}
             >
                 {description}

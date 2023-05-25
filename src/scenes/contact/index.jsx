@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import {motion} from "framer-motion";
-import {Box, Button, TextField, Typography, useMediaQuery} from "@mui/material";
+import {Box, Button, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {SelectedPage} from "../../state/enums";
 import HText from "../../components/HText";
 
 const ContactInfo = ({ setSelectedPage }) => {
-
+    const { palette } = useTheme();
     const isAboveMediumScreens = useMediaQuery("(min-width:1000px)");
 
     const {
@@ -56,7 +56,8 @@ const ContactInfo = ({ setSelectedPage }) => {
                     </HText>
                     <Typography
                         sx={{
-                            my: '1.25rem'
+                            my: '1.25rem',
+                            color: palette.neutral.main
                         }}
                     >
                         Whether you have a burning question, an exciting idea, or simply want to connect with our team,

@@ -1,10 +1,11 @@
 import ActionButton from "components/ActionButton";
-import {Box, Typography, useMediaQuery} from "@mui/material";
+import {Box, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {SelectedPage} from "../../state/enums";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import {motion} from "framer-motion";
 
 const HeroInfo = ({setSelectedPage}) => {
+    const { palette } = useTheme();
     const isAboveMediumScreens = useMediaQuery("(min-width:1000px)");
 
     return (
@@ -85,7 +86,7 @@ const HeroInfo = ({setSelectedPage}) => {
                         <Typography
                             sx={{
                                 mt: '2rem',
-                                fontSize: 'small'
+                                color: palette.neutral.main
                             }}
                         >
                             Join a thriving community of like-minded individuals who eat, sleep,

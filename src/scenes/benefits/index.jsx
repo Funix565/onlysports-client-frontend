@@ -3,7 +3,7 @@ import {
     Diversity1,
     School
 } from '@mui/icons-material'
-import {Box, Typography, useMediaQuery} from "@mui/material";
+import {Box, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {motion} from "framer-motion";
 import {SelectedPage} from "../../state/enums";
 import HText from "components/HText";
@@ -45,6 +45,7 @@ const container ={
 };
 
 const BenefitsInfo = ({setSelectedPage}) => {
+    const { palette } = useTheme();
     const isAboveMediumScreens = useMediaQuery("(min-width:1000px)");
 
     return (
@@ -82,7 +83,7 @@ const BenefitsInfo = ({setSelectedPage}) => {
                     <Typography
                         sx={{
                             my: '1.25rem',
-                            fontSize: 'small'
+                            color: palette.neutral.main
                         }}
                     >
                         Welcome to OnlySports, where passion meets connection.
@@ -205,7 +206,8 @@ const BenefitsInfo = ({setSelectedPage}) => {
                         >
                             <Typography
                                 sx={{
-                                    my: '1.25rem'
+                                    my: '1.25rem',
+                                    color: palette.neutral.main
                                 }}
                             >
                                 In our vibrant sport community, every member embarks on a journey of reaching new heights.
@@ -219,7 +221,8 @@ const BenefitsInfo = ({setSelectedPage}) => {
 
                             <Typography
                                 sx={{
-                                    mb: '1.25rem'
+                                    mb: '1.25rem',
+                                    color: palette.neutral.main
                                 }}
                             >
                                 At OnlySports, we understand that consistent training is the key to success.
