@@ -91,7 +91,7 @@ const ContactInfo = ({ setSelectedPage }) => {
                         <form
                             target="_blank"
                             onSubmit={onSubmit}
-                            // TODO: Set up for production
+                            // TODO: Set up email for production
                             action={`https://formsubmit.co/${process.env.REACT_APP_MAIL_STRING}`}
                             method="POST"
                         >

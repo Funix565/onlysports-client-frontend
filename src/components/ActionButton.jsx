@@ -3,10 +3,10 @@ import {Link} from "@mui/material";
 const ActionButton = ({children}) => {
     return (
         // TODO: Replace hardcoded colors with useTheme -> palette
-        // TODO: onClick -- navigate to Creat Account: Coach or Athlete
         // TODO: onClick different login for roles
         <Link
             underline="hover"
+            href="/login"
             sx={{
                 borderRadius: "0.375rem",
                 backgroundColor: "#FFC132",

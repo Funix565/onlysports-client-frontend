@@ -1,5 +1,5 @@
 import FlexBetween from "components/FlexBetween";
-import {Typography, useMediaQuery} from "@mui/material";
+import {Link, Typography, useMediaQuery} from "@mui/material";
 import StyledAnchorLink from "./StyledAnchorLink";
 import ActionButton from "components/ActionButton";
 import OnlyLogo from "components/OnlyLogo";
@@ -52,7 +52,7 @@ const NavbarInfo = ({isTopOfPage, selectedPage, setSelectedPage}) => {
                                 </FlexBetween>
                                 <FlexBetween
                                     sx={{gap: '2rem'}}>
-                                    <p>Sign In</p>
+                                    <Link href="/login">Sign In</Link>
                                     <ActionButton>Become a Member</ActionButton>
                                 </FlexBetween>
                             </FlexBetween>

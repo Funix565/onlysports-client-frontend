@@ -25,7 +25,6 @@ const Footer = () => {
                         mt: isAboveMediumScreens ? '0px' : '4rem'
                     }}
                 >
-                    {/*TODO: Extract logo into a separate component with hover and navigate*/}
                     <Typography fontWeight="bold" fontSize="clamp(1rem, 2rem, 2.25rem)" color="primary" >
                         OnlySports
                     </Typography>
