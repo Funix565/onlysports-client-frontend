@@ -136,7 +136,14 @@ const BenefitsInfo = ({setSelectedPage}) => {
                         }}
                     >
                         <img
-                            style={{marginLeft: 'auto', marginRight: 'auto'}}
+                            style={{
+                                marginLeft: 'auto',
+                                marginRight: 'auto',
+                                display: 'block',
+                                verticalAlign: 'middle',
+                                maxWidth: '100%',
+                                height: 'auto'
+                            }}
                             alt="benefits-page-graphic"
                             src="../assets/BenefitsPageGraphic.png"
                         />

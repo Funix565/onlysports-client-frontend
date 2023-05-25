@@ -71,7 +71,14 @@ const HeroInfo = ({setSelectedPage}) => {
                                     }
                                 }}
                             >
-                                <img alt="home-page-text" src="../assets/HomeText.png"/>
+                                <img alt="home-page-text" src="../assets/HomeText.png"
+                                    style={{
+                                        display: 'block',
+                                        verticalAlign: 'middle',
+                                        maxWidth: '100%',
+                                        height: 'auto'
+                                    }}
+                                />
                             </Box>
                         </Box>
 
@@ -140,7 +147,14 @@ const HeroInfo = ({setSelectedPage}) => {
                             justifyItems: 'end'
                         })
                 }}>
-                    <img alt="home-pageGraphic" src="../assets/HomePageGraphic.png" />
+                    <img alt="home-pageGraphic" src="../assets/HomePageGraphic.png"
+                        style={{
+                            display: 'block',
+                            verticalAlign: 'middle',
+                            maxWidth: '100%',
+                            height: 'auto'
+                        }}
+                    />
                 </Box>
             </Box>
 
@@ -171,9 +185,30 @@ const HeroInfo = ({setSelectedPage}) => {
                                 gap: '2rem'
                             }}
                         >
-                            <img alt="redbull-sponsor" src="../assets/SponsorRedBull.png" />
-                            <img alt="forbes-sponsor" src="../assets/SponsorForbes.png" />
-                            <img alt="fortune-sponsor" src="../assets/SponsorFortune.png" />
+                            <img alt="redbull-sponsor" src="../assets/SponsorRedBull.png"
+                                 style={{
+                                     display: 'block',
+                                     verticalAlign: 'middle',
+                                     maxWidth: '100%',
+                                     height: 'auto'
+                                 }}
+                            />
+                            <img alt="forbes-sponsor" src="../assets/SponsorForbes.png"
+                                 style={{
+                                     display: 'block',
+                                     verticalAlign: 'middle',
+                                     maxWidth: '100%',
+                                     height: 'auto'
+                                 }}
+                            />
+                            <img alt="fortune-sponsor" src="../assets/SponsorFortune.png"
+                                 style={{
+                                     display: 'block',
+                                     verticalAlign: 'middle',
+                                     maxWidth: '100%',
+                                     height: 'auto'
+                                 }}
+                            />
                         </Box>
                     </Box>
                 </Box>

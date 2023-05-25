@@ -227,7 +227,11 @@ const ContactInfo = ({ setSelectedPage }) => {
                         >
                             <img
                                 style={{
-                                    width: '100%'
+                                    width: '100%',
+                                    display: 'block',
+                                    verticalAlign: 'middle',
+                                    maxWidth: '100%',
+                                    height: 'auto'
                                 }}
                                 alt="contact-us-page-graphic"
                                 src="../assets/ContactUsPageGraphic.png"

@@ -12,7 +12,8 @@ body,
 /*From https://tailwindcss.com/docs/preflight#images-are-block-level*/
 /*From https://tailwindcss.com/docs/preflight#images-are-constrained-to-the-parent-width*/
 /*TODO: This affects circle avatar image in PostWidget*/
-img, svg {
+/*img*/
+svg {
     display: block;
     vertical-align: middle;
     max-width: 100%;
