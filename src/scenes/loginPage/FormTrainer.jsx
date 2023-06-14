@@ -99,6 +99,7 @@ const FormTrainer = () => {
                 setLogin({
                     user: loggedIn.user,
                     token: loggedIn.token,
+                    role: loggedIn.role,
                     isMember: loggedIn.isMember
                 })
             );
