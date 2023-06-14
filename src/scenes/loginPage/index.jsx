@@ -1,7 +1,9 @@
 import { Box, useTheme, useMediaQuery, Typography } from "@mui/material";
 import Form from "./Form";
+import FormTrainer from "./FormTrainer";
+import { Roles } from "state/enums";
 
-const LoginPage = () => {
+const LoginPage = ({ selectedRole }) => {
     const theme = useTheme();
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
@@ -31,7 +33,12 @@ const LoginPage = () => {
                 <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
                     Welcome to OnlySports, the Social Media for Sport Lovers!
                 </Typography>
-                <Form />
+
+                {selectedRole === Roles.User ? (
+                    <Form />
+                ) : (
+                    <FormTrainer />
+                )}
             </Box>
         </Box>
     );
