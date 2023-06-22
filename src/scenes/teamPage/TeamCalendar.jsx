@@ -9,8 +9,6 @@ const TeamCalendar = () => {
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
     const [calendar, setCalendar] = useState("");
 
-    console.log(calendar);
-
     const getTrainerCalendar = async () => {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/trainers/${teamId}`, {
                 method: "GET",
@@ -19,10 +17,6 @@ const TeamCalendar = () => {
                 }
         });
         const data = await response.json();
-
-        console.log(data);
-        console.log(data.calendarIframe);
-
         setCalendar(data.calendarIframe);
     };
 

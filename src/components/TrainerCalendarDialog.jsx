@@ -6,23 +6,15 @@ import { setCalendar } from "state";
 const TrainerCalendarDialog = ({ isOpened, handleClose }) => {
     const dispatch = useDispatch();
     const { calendarIframe } = useSelector((state) => state.user);
-
-    console.log("IFrame");
-    console.log(calendarIframe);
-
     const {_id} = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
 
+    // const role = useSelector((state) => state.role);
+    // const isMember = useSelector((state) => state.isMember);
 
-
-    const role = useSelector((state) => state.role);
-    const isMember = useSelector((state) => state.isMember);
     const [text, setText] = useState(calendarIframe);
 
     const handleEdit = async () => {
-        console.log("Handle edit");
-        console.log(text);
-
         // check empty string or calendar -- ok
         if (!text || text.includes("https://calendar.google.com/calendar")) {
 
@@ -36,9 +28,6 @@ const TrainerCalendarDialog = ({ isOpened, handleClose }) => {
             });
 
             const data = await response.json();
-
-            console.log(data);
-
             dispatch(setCalendar({calendarIframe: data.calendarIframe}));
         }
         else {
