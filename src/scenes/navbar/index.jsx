@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import {
     Search,
-    Message,
+    Groups,
     DarkMode,
     LightMode,
     Notifications,
@@ -31,6 +31,8 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((state) => state.user);
+    const isMember = useSelector((state) => state.isMember);
+
     // Allows us to determine screen size and use media query inside React
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
@@ -72,7 +74,13 @@ const Navbar = () => {
                             <LightMode sx={{ color: dark, fontSize: "25px" }} />
                         )}
                     </IconButton>
-                    <Message sx={{ fontSize: "25px" }} />
+
+                    {isMember && (
+                        <IconButton onClick={() => navigate(`/team/${isMember}`)}>
+                            <Groups sx={{ color: dark, fontSize: "25px" }} />
+                        </IconButton>
+                    )}
+
                     <Notifications sx={{ fontSize: "25px" }} />
                     <Help sx={{ fontSize: "25px" }} />
                     <FormControl variant="standard" value={fullName}>
@@ -143,7 +151,14 @@ const Navbar = () => {
                                 <LightMode sx={{ color: dark, fontSize: "25px" }} />
                             )}
                         </IconButton>
-                        <Message sx={{ fontSize: "25px" }} />
+
+                        {/*Team detection and navigation feature*/}
+                        {isMember && (
+                            <IconButton onClick={() => navigate(`/team/${isMember}`)}>
+                                <Groups sx={{ color: dark, fontSize: "25px" }} />
+                            </IconButton>
+                        )}
+
                         <Notifications sx={{ fontSize: "25px" }} />
                         <Help sx={{ fontSize: "25px" }} />
                         <FormControl variant="standard" value={fullName}>
