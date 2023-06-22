@@ -1,6 +1,6 @@
 import {Typography, useTheme} from "@mui/material";
 
-const OnlyLogo = () => {
+const OnlyLogo = ({ onClick }) => {
     const theme = useTheme();
     const primaryLight = theme.palette.primary.light;
 
@@ -9,6 +9,7 @@ const OnlyLogo = () => {
             fontWeight="bold"
             fontSize="clamp(1rem, 2rem, 2.25rem)"
             color="primary"
+            onClick={onClick}
             sx={{
                 "&:hover": {
                     color: primaryLight,

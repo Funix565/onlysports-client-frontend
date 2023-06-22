@@ -6,7 +6,7 @@ const ActionButton = ({children}) => {
         // TODO: onClick different login for roles
         <Link
             underline="hover"
-            href="/login"
+            href="/loginTrainer"
             sx={{
                 borderRadius: "0.375rem",
                 backgroundColor: "#FFC132",

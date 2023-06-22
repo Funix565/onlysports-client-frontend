@@ -44,6 +44,7 @@ const container ={
     },
 };
 
+// TODO: Bad colors in dark mode
 const BenefitsInfo = ({setSelectedPage}) => {
     const { palette } = useTheme();
     const isAboveMediumScreens = useMediaQuery("(min-width:1000px)");

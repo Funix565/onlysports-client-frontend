@@ -52,8 +52,8 @@ const NavbarInfo = ({isTopOfPage, selectedPage, setSelectedPage}) => {
                                 </FlexBetween>
                                 <FlexBetween
                                     sx={{gap: '2rem'}}>
-                                    <Link href="/login">Sign In</Link>
-                                    <ActionButton>Become a Member</ActionButton>
+                                    <Link href="/login">Sign In as a User</Link>
+                                    <ActionButton>Become a Trainer</ActionButton>
                                 </FlexBetween>
                             </FlexBetween>
                         )}

@@ -1,4 +1,4 @@
-import {Box, Typography, useMediaQuery, useTheme} from "@mui/material";
+import { Box, Link, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 const Footer = () => {
     const { palette } = useTheme();
@@ -55,14 +55,25 @@ const Footer = () => {
                     <Typography variant="h4" fontWeight="700">
                         Links
                     </Typography>
-                    <Typography sx={{ my: '1.25rem', color: '#FF6B66' }}>
+
+                    <Typography sx={{ my: '1.25rem' }}>
+                    <Link target="_blank" rel="noreferrer"
+                          href="https://github.com/Funix565/onlysports-client-frontend"
+                          sx={{ color: '#FF6B66' }}>
                         GitHub
+                    </Link>
                     </Typography>
-                    <Typography sx={{ my: '1.25rem', color: '#FF6B66' }}>
-                        GitHub
+
+                    <Typography sx={{ my: '1.25rem' }}>
+                    <Link target="_blank" rel="noreferrer"
+                          href="https://youtu.be/I2NNxr3WPDo"
+                          sx={{ color: '#FF6B66' }}>
+                        Application Tutorial
+                    </Link>
                     </Typography>
+
                     <Typography sx={{ my: '1.25rem', color: '#FF6B66' }}>
-                        GitHub
+                        Lorem
                     </Typography>
                 </Box>
 

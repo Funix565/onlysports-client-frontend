@@ -1,4 +1,4 @@
-import {Box, useTheme} from "@mui/material";
+import {Box} from "@mui/material";
 import NavbarInfo from "scenes/navbar/navbarinfo";
 import {useEffect, useState} from "react";
 import {SelectedPage} from "state/enums";
@@ -26,6 +26,8 @@ const InfoPage = () => {
     }, []);
 
     return (
+        // TODO: Remove box and use Fragment <></>
+        // Or create workaround for this Box. On zoom- the main page should take up the entire page
         <Box>
             <NavbarInfo
                 isTopOfPage={isTopOfPage}
