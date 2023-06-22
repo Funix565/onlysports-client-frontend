@@ -6,10 +6,13 @@ import MyPostWidget from "scenes/widgets/MyPostWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
 import AdvertWidget from "scenes/widgets/AdvertWidget";
 import FriendListWidget from "scenes/widgets/FriendListWidget";
+import { Roles, SelectedPage } from "state/enums";
+import TrainerWidget from "scenes/widgets/TrainerWidget";
 
 const HomePage = () => {
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
     const { _id, picturePath } = useSelector((state) => state.user);
+    const role = useSelector((state) => state.role);
 
     return (
         <Box>
@@ -22,7 +25,8 @@ const HomePage = () => {
                 justifyContent="space-between"
             >
                 <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-                    <UserWidget userId={_id} picturePath={picturePath} />
+                    {role === Roles.User && <UserWidget userId={_id} picturePath={picturePath} />}
+                    {role === Roles.Trainer && <TrainerWidget trainerId={_id} picturePath={picturePath} />}
                 </Box>
 
                 <Box
@@ -30,14 +34,14 @@ const HomePage = () => {
                     mt={isNonMobileScreens ? undefined : "2rem"}
                 >
                     <MyPostWidget picturePath={picturePath} />
-                    <PostsWidget userId={_id} />
+                    <PostsWidget userId={_id} pageType={SelectedPage.OnlyHome} />
                 </Box>
 
                 {isNonMobileScreens && (
                     <Box flexBasis="26%">
                         <AdvertWidget />
                         <Box m="2rem 0" />
-                        <FriendListWidget userId={_id} />
+                        { role === Roles.User && <FriendListWidget userId={_id} /> }
                     </Box>
                 )}
             </Box>
