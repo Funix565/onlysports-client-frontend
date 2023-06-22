@@ -2,7 +2,8 @@ import {
     EditOutlined,
     DeleteOutlined,
     AttachFileOutlined,
-    GifBoxOutlined,
+    VisibilityOffOutlined,
+    VisibilityOutlined,
     ImageOutlined,
     MicOutlined,
     MoreHorizOutlined
@@ -24,9 +25,9 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
+import { Roles } from "../../state/enums";
 
-// NOTE: There is an issue with posting an image sometimes :(
-const MyPostWidget = ({ picturePath }) => {
+const MyPostWidget = ({ picturePath, isPrivate = false }) => {
     const dispatch = useDispatch();
     const [isImage, setIsImage] = useState(false);
     const [image, setImage] = useState(null);
@@ -34,6 +35,9 @@ const MyPostWidget = ({ picturePath }) => {
     const { palette } = useTheme();
     const { _id } = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
+
+    const role = useSelector((state) => state.role);
+
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
     const mediumMain = palette.neutral.mediumMain;
     const medium = palette.neutral.medium;
@@ -42,6 +46,7 @@ const MyPostWidget = ({ picturePath }) => {
         const formData = new FormData();
         formData.append("userId", _id);
         formData.append("description", post);
+        formData.append("isPrivate", JSON.stringify(isPrivate));
         if (image) {
             formData.append("picture", image);
             formData.append("picturePath", image.name);
@@ -136,13 +141,22 @@ const MyPostWidget = ({ picturePath }) => {
                     </Typography>
                 </FlexBetween>
 
+                {role === Roles.Trainer && (
+                    isPrivate ? (
+                    <FlexBetween gap="0.25rem">
+                        <VisibilityOffOutlined sx={{ color: mediumMain }} />
+                        <Typography color={mediumMain}>Private Post</Typography>
+                    </FlexBetween>
+                ) : (
+                    <FlexBetween gap="0.25rem">
+                        <VisibilityOutlined sx={{ color: mediumMain }} />
+                        <Typography color={mediumMain}>Public Post</Typography>
+                    </FlexBetween>
+                    )
+                )}
+
                 {isNonMobileScreens ? (
                     <>
-                        <FlexBetween gap="0.25rem">
-                            <GifBoxOutlined sx={{ color: mediumMain }} />
-                            <Typography color={mediumMain}>Clip</Typography>
-                        </FlexBetween>
-
                         <FlexBetween gap="0.25rem">
                             <AttachFileOutlined sx={{ color: mediumMain }} />
                             <Typography color={mediumMain}>Attachment</Typography>

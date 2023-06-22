@@ -1,29 +1,18 @@
-import { EmojiEvents, PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
+import { EmojiEvents, GroupAddOutlined, GroupRemoveOutlined } from "@mui/icons-material";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setFriends } from "state";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
+import { setMembers } from "../state";
 import { useEffect, useState } from "react";
 
-const Friend = ({friendId, name, subtitle, userPicturePath}) => {
-    // TODO: It could be Trainer as well?
-    //  Or create similar component
-
-    // TODO: Wow, this looks incredibly complicated to separate pages based on roles :(
-    // Friend feature for User is everywhere but Trainer doesn't have friends. Can't add friends.
-    // It means that Post feature where I can add author is also ruined
-    // Perhaps now I should figure out how to track Role on almost every page/component
-    // And change features based on that: add friend or add member
-    // At the same time Trainer can't be Friend of User. So track this behaviour
-    // So, User can't add Trainer. And Trainer can't add other Trainer
-
+const Member = ({memberId, name, subtitle, userPicturePath}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {_id} = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
-    const friends = useSelector((state) => state.user.friends);
+    const members = useSelector((state) => state.user.members);
 
     const {palette} = useTheme();
     const primaryLight = palette.primary.light;
@@ -31,13 +20,12 @@ const Friend = ({friendId, name, subtitle, userPicturePath}) => {
     const main = palette.neutral.main;
     const medium = palette.neutral.medium;
 
-    const isFriend = friends.find((friend) => friend._id === friendId);
+    const isMember = members.find((member) => member._id === memberId);
+
     const [isTrainer, setIsTrainer] = useState(null);
 
-    // Try to find Trainer with this friendId.
-    // We have fewer Trainers, so it is ok to perform a query with the collection ???
     const getTrainer = async () => {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/trainers/${friendId}`,
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/trainers/${memberId}`,
             {
                 method: "GET",
                 headers: {Authorization: `Bearer ${token}`}
@@ -47,9 +35,10 @@ const Friend = ({friendId, name, subtitle, userPicturePath}) => {
         setIsTrainer(data);
     };
 
-    const patchFriend = async () => {
+    // Perhaps, I can include this in Friend component and play around with conditions for User and Trainer
+    const patchMember = async () => {
         const response = await fetch(
-            `${process.env.REACT_APP_API_URL}/users/${_id}/${friendId}`,
+            `${process.env.REACT_APP_API_URL}/trainers/${_id}/members/${memberId}`,
             {
                 method: "PATCH",
                 headers: {
@@ -59,13 +48,13 @@ const Friend = ({friendId, name, subtitle, userPicturePath}) => {
             }
         );
         const data = await response.json();
-        dispatch(setFriends({friends: data}));
+        dispatch(setMembers({members: data}));
     };
 
     // TODO: Looks complicated and silly. How to implement in a smarter way?
     useEffect(() => {
         getTrainer();
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <FlexBetween>
@@ -73,8 +62,9 @@ const Friend = ({friendId, name, subtitle, userPicturePath}) => {
                 <UserImage image={userPicturePath} size="55px"/>
                 <Box
                     onClick={() => {
-                        navigate(`/profile/${friendId}`);
+                        navigate(`/profile/${memberId}`);
                         navigate(0); // Dirty workaround. 04:44:30
+                        // He says that without is, component don't re-render
                     }}
                 >
                     {isTrainer ? (
@@ -114,17 +104,16 @@ const Friend = ({friendId, name, subtitle, userPicturePath}) => {
                     </Typography>
                 </Box>
             </FlexBetween>
-            {/*Forbid adding yourself as a friend*/}
-            {/*No icon for Trainer if User sees Trainer post*/}
-            {friendId !== _id && !isTrainer && (
+            {/*Forbid adding yourself as a member*/}
+            {memberId !== _id && !isTrainer && (
                 <IconButton
-                    onClick={() => patchFriend()}
+                    onClick={() => patchMember()}
                     sx={{backgroundColor: primaryLight, p: "0.6rem"}}
                 >
-                    {isFriend ? (
-                        <PersonRemoveOutlined sx={{color: primaryDark}}/>
+                    {isMember ? (
+                        <GroupRemoveOutlined sx={{color: primaryDark}}/>
                     ) : (
-                        <PersonAddOutlined sx={{color: primaryDark}}/>
+                        <GroupAddOutlined sx={{color: primaryDark}}/>
                     )}
                 </IconButton>
             )}
@@ -132,4 +121,4 @@ const Friend = ({friendId, name, subtitle, userPicturePath}) => {
     );
 };
 
-export default Friend;
+export default Member;

@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import {
     Search,
-    Message,
+    Groups,
     DarkMode,
     LightMode,
     Notifications,
@@ -24,12 +24,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
+import OnlyLogo from "components/OnlyLogo";
 
 const Navbar = () => {
     const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((state) => state.user);
+    const isMember = useSelector((state) => state.isMember);
+
     // Allows us to determine screen size and use media query inside React
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
@@ -46,20 +49,11 @@ const Navbar = () => {
     return (
         <FlexBetween padding="1rem 6%" backgroundColor={alt}>
             <FlexBetween gap="1.75rem">
-                <Typography
-                    fontWeight="bold"
-                    fontSize="clamp(1rem, 2rem, 2.25rem)"
-                    color="primary"
+
+                <OnlyLogo
                     onClick={() => navigate("/home")}
-                    sx={{
-                        "&:hover": {
-                            color: primaryLight,
-                            cursor: "pointer"
-                        }
-                    }}
-                >
-                    OnlySports
-                </Typography>
+                />
+
                 {isNonMobileScreens && (
                     <FlexBetween backgroundColor={neutralLight} borderRadius="9px" gap="3rem" padding="0.1rem 1.5rem">
                         <InputBase placeholder="Search..." />
@@ -80,7 +74,13 @@ const Navbar = () => {
                             <LightMode sx={{ color: dark, fontSize: "25px" }} />
                         )}
                     </IconButton>
-                    <Message sx={{ fontSize: "25px" }} />
+
+                    {isMember && (
+                        <IconButton onClick={() => navigate(`/team/${isMember}`)}>
+                            <Groups sx={{ color: dark, fontSize: "25px" }} />
+                        </IconButton>
+                    )}
+
                     <Notifications sx={{ fontSize: "25px" }} />
                     <Help sx={{ fontSize: "25px" }} />
                     <FormControl variant="standard" value={fullName}>
@@ -151,7 +151,14 @@ const Navbar = () => {
                                 <LightMode sx={{ color: dark, fontSize: "25px" }} />
                             )}
                         </IconButton>
-                        <Message sx={{ fontSize: "25px" }} />
+
+                        {/*Team detection and navigation feature*/}
+                        {isMember && (
+                            <IconButton onClick={() => navigate(`/team/${isMember}`)}>
+                                <Groups sx={{ color: dark, fontSize: "25px" }} />
+                            </IconButton>
+                        )}
+
                         <Notifications sx={{ fontSize: "25px" }} />
                         <Help sx={{ fontSize: "25px" }} />
                         <FormControl variant="standard" value={fullName}>

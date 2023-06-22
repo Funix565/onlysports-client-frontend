@@ -15,13 +15,15 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
+import { DatePicker } from "@mui/x-date-pickers";
 
 const registerSchema = yup.object().shape({
     fullName: yup.string().required("required"),
     email: yup.string().max(255).email("invalid email").required("required"),
     password: yup.string().min(5).required("required"),
     location: yup.string().required("required"),
-    occupation: yup.string().required("required"),
+    headline: yup.string().required("required"),
+    careerStart: yup.date().required("required"),
     picture: yup.string().required("required")
 });
 
@@ -35,7 +37,8 @@ const initialValuesRegister = {
     email: "",
     password: "",
     location: "",
-    occupation: "",
+    headline: "",
+    careerStart: "",
     picture: ""
 };
 
@@ -44,16 +47,19 @@ const initialValuesLogin = {
     password: ""
 };
 
-const Form = () => {
+
+const FormTrainer = () => {
     const [pageType, setPageType] = useState("login");
-    const { palette } = useTheme();
+    const {palette} = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isNonMobile = useMediaQuery("(min-width:600px)");
+
+    // Well, I could have complicated the main form and include checks for User/Trainer
+    // But it ruins single responsibility principle
     const isLogin = pageType === "login";
     const isRegister = pageType === "register";
 
-    // TODO: When I have empty form and click REGISTER only email and password marked as required
     const register = async (values, onSubmitProps) => {
         // this allows us to send form info with image
         const formData = new FormData();
@@ -62,24 +68,24 @@ const Form = () => {
         }
         formData.append('picturePath', values.picture.name);
 
-        const savedUserResponse = await fetch(
-            `${process.env.REACT_APP_API_URL}/auth/register`,
+        const savedTrainerResponse = await fetch(
+            `${process.env.REACT_APP_API_URL}/auth/registerTrainer`,
             {
                 method: "POST",
                 body: formData
             }
         );
-        const savedUser = await savedUserResponse.json();
+        const savedTrainer = await savedTrainerResponse.json();
         onSubmitProps.resetForm();
 
-        if (savedUser) {
+        if (savedTrainer) {
             setPageType("login");
         }
     };
 
     const login = async (values, onSubmitProps) => {
         const loggedInResponse = await fetch(
-            `${process.env.REACT_APP_API_URL}/auth/login`,
+            `${process.env.REACT_APP_API_URL}/auth/loginTrainer`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -113,22 +119,22 @@ const Form = () => {
             validationSchema={isLogin ? loginSchema : registerSchema}
         >
             {({
-                values,
-                errors,
-                touched,
-                handleBlur,
-                handleChange,
-                handleSubmit,
-                setFieldValue,
-                resetForm
-            }) => (
+                  values,
+                  errors,
+                  touched,
+                  handleBlur,
+                  handleChange,
+                  handleSubmit,
+                  setFieldValue,
+                  resetForm
+              }) => (
                 <form onSubmit={handleSubmit}>
                     <Box
                         display="grid"
                         gap="30px"
                         gridTemplateColumns="repeat(4, minmax(0, 1fr))"
                         sx={{
-                            "& > div": { gridColumn: isNonMobile ? undefined : "span 4" }
+                            "& > div": {gridColumn: isNonMobile ? undefined : "span 4"}
                         }}
                     >
                         {isRegister && (
@@ -141,7 +147,7 @@ const Form = () => {
                                     name="fullName"
                                     error={Boolean(touched.fullName) && Boolean(errors.fullName)}
                                     helperText={touched.fullName && errors.fullName}
-                                    sx={{ gridColumn: "span 4" }}
+                                    sx={{gridColumn: "span 4"}}
                                 />
                                 <TextField
                                     label="Location"
@@ -151,17 +157,28 @@ const Form = () => {
                                     name="location"
                                     error={Boolean(touched.location) && Boolean(errors.location)}
                                     helperText={touched.location && errors.location}
-                                    sx={{ gridColumn: "span 4" }}
+                                    sx={{gridColumn: "span 4"}}
                                 />
                                 <TextField
-                                    label="Occupation"
+                                    label="Headline"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
-                                    value={values.occupation}
-                                    name="occupation"
-                                    error={Boolean(touched.occupation) && Boolean(errors.occupation)}
-                                    helperText={touched.occupation && errors.occupation}
-                                    sx={{ gridColumn: "span 4" }}
+                                    value={values.headline}
+                                    name="headline"
+                                    error={Boolean(touched.headline) && Boolean(errors.headline)}
+                                    helperText={touched.headline && errors.headline}
+                                    sx={{gridColumn: "span 4"}}
+                                />
+                                <DatePicker
+                                    label="Select your career start date"
+                                    disableFuture
+                                    onBlur={handleBlur}
+                                    // Important! To write custom onChange for this complex component without `name` property
+                                    onChange={(date) => setFieldValue("careerStart", date)}
+                                    value={values.careerStart}
+                                    error={Boolean(touched.careerStart) && Boolean(errors.careerStart)}
+                                    helperText={touched.careerStart && errors.careerStart}
+                                    sx={{gridColumn: "span 4"}}
                                 />
                                 <Box
                                     gridColumn="span 4"
@@ -252,8 +269,8 @@ const Form = () => {
                             }}
                         >
                             {isLogin
-                                ? "Don't have an account? Sign Up here."
-                                : "Already have an account? Log In here."}
+                                ? "Don't have an account? Sign Up as Trainer here."
+                                : "Already have an account? Log In as Trainer here."}
                         </Typography>
                     </Box>
                 </form>
@@ -262,4 +279,4 @@ const Form = () => {
     );
 };
 
-export default Form;
+export default FormTrainer;

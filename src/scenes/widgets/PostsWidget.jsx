@@ -2,16 +2,18 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
 import PostWidget from "./PostWidget";
+import { SelectedPage } from "../../state/enums";
 
-const PostsWidget = ({ userId, isProfile = false }) => {
+const PostsWidget = ({ userId, pageType }) => {
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts);
     const token = useSelector((state) => state.token);
 
     /*
-        Two api-calls.
+        Three api-calls.
         On the home page, get all the posts -- getFeedPosts.
         On the profile page, get specific user's posts -- getUserPosts.
+        On the team page, get specific trainer's private posts -- getTeamPosts
     */
 
     const getPosts = async () => {
@@ -32,10 +34,23 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         dispatch(setPosts({ posts: data }));
     };
 
+    const getTeamPosts = async () => {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/posts/${userId}/teamPosts`, {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        const data = await response.json();
+        dispatch(setPosts({ posts: data }));
+    }
+
     useEffect(() => {
-        if (isProfile) {
+        if (pageType === SelectedPage.Profile) {
             getUserPosts();
-        } else {
+        }
+        else if (pageType === SelectedPage.Team) {
+            getTeamPosts();
+        }
+        else if (pageType === SelectedPage.OnlyHome) {
             getPosts();
         }
     }, []); // eslint-disable-line react-hooks/exhaustive-deps

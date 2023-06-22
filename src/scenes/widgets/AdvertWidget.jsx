@@ -18,6 +18,7 @@ const AdvertWidget = () => {
                     Dmytro Denkin, Serhii Sezonchyk
                 </Typography>
             </FlexBetween>
+            {/*TODO: `<a>` inside `<a>`. Maybe use onClick? But then how to navigate?*/}
             <Card
                 style={{borderRadius: "0.75rem", margin: "0.75rem 0"}}>
                 <CardActionArea

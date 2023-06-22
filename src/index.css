@@ -8,3 +8,23 @@ body,
     width: 100%;
     font-family: "Rubik", sans-serif;
 }
+
+/*From https://tailwindcss.com/docs/preflight#images-are-block-level*/
+/*From https://tailwindcss.com/docs/preflight#images-are-constrained-to-the-parent-width*/
+/*This affects circle avatar image in PostWidget*/
+/*img*/
+svg {
+    display: block;
+    vertical-align: middle;
+    max-width: 100%;
+    height: auto;
+}
+
+/*Nice cards for benefits*/
+/*From https://tailwindcss.com/docs/preflight#border-styles-are-reset-globally*/
+*,
+::before,
+::after {
+    border-width: 0;
+    border-style: solid;
+}
