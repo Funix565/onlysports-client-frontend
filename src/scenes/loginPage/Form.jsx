@@ -18,16 +18,16 @@ import FlexBetween from "components/FlexBetween";
 
 const registerSchema = yup.object().shape({
     fullName: yup.string().required("required"),
-    email: yup.string().email("invalid email").required("required"),
-    password: yup.string().required("required"),
+    email: yup.string().max(255).email("invalid email").required("required"),
+    password: yup.string().min(5).required("required"),
     location: yup.string().required("required"),
     occupation: yup.string().required("required"),
     picture: yup.string().required("required")
 });
 
 const loginSchema = yup.object().shape({
-    email: yup.string().email("invalid email").required("required"),
-    password: yup.string().required("required")
+    email: yup.string().max(255).email("invalid email").required("required"),
+    password: yup.string().min(5).required("required")
 });
 
 const initialValuesRegister = {
@@ -53,6 +53,7 @@ const Form = () => {
     const isLogin = pageType === "login";
     const isRegister = pageType === "register";
 
+    // TODO: When I have empty form and click REGISTER only email and password marked as required
     const register = async (values, onSubmitProps) => {
         // this allows us to send form info with image
         const formData = new FormData();
@@ -91,7 +92,9 @@ const Form = () => {
             dispatch(
                 setLogin({
                     user: loggedIn.user,
-                    token: loggedIn.token
+                    token: loggedIn.token,
+                    role: loggedIn.role,
+                    isMember: loggedIn.isMember
                 })
             );
             navigate("/home");
@@ -250,7 +253,7 @@ const Form = () => {
                         >
                             {isLogin
                                 ? "Don't have an account? Sign Up here."
-                                : "Already have an account? Login here."}
+                                : "Already have an account? Log In here."}
                         </Typography>
                     </Box>
                 </form>
