@@ -5,18 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
     This data will be accessible throughout our entire application.
     And we can use it anywhere we want.
 */
-// TODO: Maybe it would be smart to store role User/Trainer or isMember somewhere in state
-//  If I plan to use conditional rendering to control UI I have to choose between isMember or Trainer itself
-//  I have access to user, so I can check its `trainerId` field
-//  And, maybe when the field does not exist, it means Trainer role
-//  Btw, I can decode Role from token already. -- No, bad to decode token on frontend
-//  Better store role. Backend returns role
 
-// TODO: Backend returns ROLE from `login` endpoint
-
-// TODO: Role looks unnecessary here because information about User or Trainer can't control routing
-//  It is member what matters. Does the entity has access to the team?
-//  check Membrship approach
 const initialState = {
     mode: "light",
     user: null,
@@ -70,9 +59,16 @@ export const authSlice = createSlice({
             } else {
                 console.error("trainer members do not exist");
             }
-        }
+        },
+        setCalendar: (state, action) => {
+            if (state.user) {
+                state.user.calendarIframe = action.payload.calendarIframe;
+            } else {
+                console.error("trainer calendarIframe does not exist");
+            }
+        },
     }
 })
 
-export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost, setMembers } = authSlice.actions;
+export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost, setMembers, setCalendar } = authSlice.actions;
 export default authSlice.reducer;
