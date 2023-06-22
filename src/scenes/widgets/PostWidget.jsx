@@ -11,6 +11,8 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "state";
+import { Roles } from "../../state/enums";
+import Member from "../../components/Member";
 
 const PostWidget = ({
     postId,
@@ -26,6 +28,7 @@ const PostWidget = ({
     const [isComments, setIsComments] = useState(false);
     const dispatch = useDispatch();
     const token = useSelector((state) => state.token);
+    const role = useSelector((state) => state.role);
     const loggedInUserId = useSelector((state) => state.user._id);
     const isLiked = Boolean(likes[loggedInUserId]);
     const likeCount = Object.keys(likes).length;
@@ -49,12 +52,24 @@ const PostWidget = ({
 
     return (
         <WidgetWrapper m="2rem 0">
-            <Friend
-                friendId={postUserId}
-                name={name}
-                subtitle={location}
-                userPicturePath={userPicturePath}
-            />
+            {role === Roles.User && (
+                <Friend
+                    friendId={postUserId}
+                    name={name}
+                    subtitle={location}
+                    userPicturePath={userPicturePath}
+                />
+            )}
+
+            {role === Roles.Trainer && (
+                <Member
+                    memberId={postUserId}
+                    name={name}
+                    subtitle={location}
+                    userPicturePath={userPicturePath}
+                />
+            )}
+
             <Typography color={main} sx={{ mt: "1rem" }}>
                 {description}
             </Typography>
